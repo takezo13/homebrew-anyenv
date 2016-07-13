@@ -10,7 +10,10 @@ class Anyenv < Formula
 
   def caveats; <<-EOS.undent
     To  enable anyenv, add this to your profile follow:
-      eval "$(anyenv init -)"
+
+      if which anyenv > /dev/null; then
+        eval "$(anyenv init -)"
+      fi
     EOS
   end
 
