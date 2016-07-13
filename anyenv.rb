@@ -1,21 +1,20 @@
 class Anyenv < Formula
-  desc "anyenv - all in one for **env"
+  desc "all in one for **envs"
   homepage "https://github.com/riywo/anyenv"
-  head "git://github.com/riywo/anyenv.git", :using => :git
+  head "https://github.com/riywo/anyenv.git"
 
   def install
-    inreplace "libexec/anyenv", %Q|ANYENV_ROOT="${HOME}/.anyenv"|, %Q|ANYENV_ROOT="#{prefix}"|
+    inreplace "libexec/anyenv", %(ANYENV_ROOT="${HOME}/.anyenv"), %(ANYENV_ROOT="#{prefix}")
     prefix.install Dir["*"]
   end
 
   def caveats; <<-EOS.undent
-    Run the following script and add configuration to your Run-Control File:
-      
-      echo 'eval "$(anyenv init -)"' >> ~/.your_profile
+    To  enable anyenv, add this to your profile follow:
+      eval "$(anyenv init -)"
     EOS
   end
 
   test do
-    system bin/"anyenv" "install" "-L"
+    system bin/"anyenv", "install", "-l"
   end
 end
